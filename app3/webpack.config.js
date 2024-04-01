@@ -1,26 +1,27 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
 const Dotenv = require('dotenv-webpack');
-const { ModuleFederationPlugin } =  require("webpack").container; 
+const { ModuleFederationPlugin } = require('webpack').container;
 
 const config = {
   entry: {
     polyfill: 'babel-polyfill',
-    store: './src/store.ts',
-    app: ['./src/index.ts'],
-    app2: ['./src/addon.ts'],
+    standalone: './src/index.tsx',
   },
   output: {
     path:  __dirname + '/build',
-    filename: '[name].[contenthash].bundle.js'
+    filename: '[name].bundle.js'
   },
   devtool: "inline-source-map",
+  devServer: {
+    port: 3002
+  },
   module: {
     rules: [
       {
         test: /\.(tsx|ts)$/,
         use: 'ts-loader',
-        exclude: path.resolve(__dirname, 'node_modules')
+        exclude: path.resolve(__dirname,'node_modules')
       },
       {
         test: /\.css$/i,
@@ -33,15 +34,15 @@ const config = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "app1",
-      filename: "remote.js",
+      name: 'app3',
+      filename: 'remote.js',
       exposes: {
-        "./store": "./src/store"
+        './basic': './src/components/basic'
       },
       remotes: {
-        app3: "app3@http://localhost:3002/remote.js",
+        app1: 'app1@http://localhost:8080/remote.js',
       },
-      shared: {react: {singleton: true}, "react-dom": {singleton: true}},
+      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./index.html")

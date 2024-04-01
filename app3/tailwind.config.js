@@ -7,8 +7,5 @@ module.exports = {
     extend: {},
   },
   plugins: [],
-  safelist: [
-    {pattern: /(bg|text|border|p[xy]?|m[xy]?|d|inline|w|rounded|space|gap|grid)-./},
-  ]
 }
 
