@@ -14,7 +14,8 @@ const config = {
   },
   devtool: "inline-source-map",
   devServer: {
-    port: 3002
+    port: 3002,
+    hot: false
   },
   module: {
     rules: [
@@ -42,7 +43,11 @@ const config = {
       remotes: {
         app1: 'app1@http://localhost:8080/remote.js',
       },
-      shared: { react: { singleton: true }, 'react-dom': { singleton: true } },
+      shared: { 
+        react: { singleton: true }, 
+        'react-dom': { singleton: true },
+        'babel-polyfill': { singleton: true, eager: true }
+      },
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./index.html")

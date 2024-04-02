@@ -4,7 +4,7 @@ interface Window {
 }
 
 declare module 'app3/basic' {
-  import { ComponentType } from 'react';
+  import { ComponentType, FC } from 'react';
   const Component: ComponentType<any>;
   export default Component;
 }

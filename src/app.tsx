@@ -10,7 +10,7 @@ const root = createRoot(document.getElementById("root2"));
 root.render(
   <Provider store={window.store}>
     <Basic1 />
-    <Suspense fallback="loading">
+    <Suspense fallback={"loading"}>
       <Basic />
     </Suspense>
   </Provider>

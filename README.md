@@ -1,4 +1,4 @@
-## Caveat
+# Caveat
 
 The setup:
 
@@ -8,3 +8,9 @@ The setup:
 
 Currently HMR does not work with Module Federation, this make reloading throw errors from browser. We suggest development by building local store for each repository then plug then in central store for final testing.
 
+## What is missing?
+
+- HMR
+- Custom module live injection
+- CI/CD
+- Separation of styleguide
