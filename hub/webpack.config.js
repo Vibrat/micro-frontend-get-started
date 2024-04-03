@@ -15,7 +15,8 @@ const config = {
   },
   devtool: "inline-source-map",
   devServer: {
-    hot: false
+    hot: false,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -46,7 +47,8 @@ const config = {
       },
       shared: {
         react: {singleton: true}, 
-        "react-dom": {singleton: true}
+        "react-dom": {singleton: true},
+        "react-router-dom": {singleton: true}
       },
     }),
     new HtmlWebpackPlugin({
