@@ -5,8 +5,7 @@ const { ModuleFederationPlugin } = require('webpack').container;
 
 const config = {
   entry: {
-    polyfill: 'babel-polyfill',
-    standalone: './src/index.tsx',
+    main: './src/index.ts',
   },
   output: {
     path:  __dirname + '/build',
@@ -14,7 +13,7 @@ const config = {
   },
   devtool: "inline-source-map",
   devServer: {
-    port: 3002,
+    port: 3001,
     hot: false
   },
   module: {
@@ -35,18 +34,11 @@ const config = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: 'app3',
+      name: 'styleguide',
       filename: 'remote.js',
       exposes: {
-        './basic': './src/components/basic'
-      },
-      remotes: {
-        app1: 'app1@http://localhost:8080/remote.js',
-      },
-      shared: { 
-        react: { singleton: true }, 
-        'react-dom': { singleton: true }
-      },
+        './base': './src/index.ts',
+      }
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./index.html")

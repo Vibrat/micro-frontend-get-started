@@ -7,8 +7,7 @@ const config = {
   entry: {
     polyfill: 'babel-polyfill',
     store: './src/store.ts',
-    app: ['./src/index.ts'],
-    app2: ['./src/addon.ts'],
+    app: ['./src/index.ts']
   },
   output: {
     path:  __dirname + '/build',
@@ -27,7 +26,7 @@ const config = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: ['style-loader', 'css-loader'],
       },      
     ]
   },
@@ -43,18 +42,21 @@ const config = {
       },
       remotes: {
         app3: "app3@http://localhost:3002/remote.js",
+        styleguide: "styleguide@http://localhost:3001/remote.js"
       },
       shared: {
         react: {singleton: true}, 
-        "react-dom": {singleton: true},
-        'babel-polyfill': { singleton: true, eager: true }
+        "react-dom": {singleton: true}
       },
     }),
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "./index.html")
     }),
     new Dotenv()
-  ]
+  ],
+  optimization: {
+    chunkIds: 'named'
+  }
 }
 
 module.exports = config
